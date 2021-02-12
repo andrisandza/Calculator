@@ -1,44 +1,140 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<CodeBlocks_project_file>
-	<FileVersion major="1" minor="6" />
-	<Project>
-		<Option title="05.02.21" />
-		<Option pch_mode="2" />
-		<Option compiler="gcc" />
-		<Build>
-			<Target title="Debug">
-				<Option output="bin/Debug/05" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-					<Add directory="include" />
-				</Compiler>
-			</Target>
-			<Target title="Release">
-				<Option output="bin/Release/05" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-O2" />
-					<Add directory="include" />
-				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
-			</Target>
-		</Build>
-		<Compiler>
-			<Add option="-Wall" />
-			<Add option="-fexceptions" />
-		</Compiler>
-		<Unit filename="include/Calculator.h" />
-		<Unit filename="main.cpp" />
-		<Unit filename="src/Calculator.cpp" />
-		<Extensions>
-			<lib_finder disable_auto="1" />
-		</Extensions>
-	</Project>
-</CodeBlocks_project_file>
+main.cpp
+
+#include <iostream>
+#include <cmath>
+#include "Calculator.h"
+#include <math.h>
+using namespace std;
+
+int main()
+{
+    Calculator calc;
+    string atbilde = "ja";
+    string dati;
+    cout << "Izveelaties operaaciju (+ ; - ; *, /, kvadratsakne, kubiskaasakne)" << endl;
+    while(atbilde != "ne")
+    {
+    while(cin >> dati && dati != "ne")
+    {
+        calc.operacija(dati);
+        cout << "Vai tu gribi atkaartot?" << endl << "Atbildi ja / ne " << endl;
+        cin >> atbilde;
+        if(atbilde == "ne")
+        {
+            break;
+        }
+        cout << "Izveelaties operaaciju (+ ; - ; *, /, kvadratsakne, kubiskaasakne)" << endl;
+    }
+    }
+    cout << endl << "Programma beidzaas" << endl;
+    return 0;
+}
+	
+include/Calculator.h
+	
+#ifndef CALCULATOR_H
+#define CALCULATOR_H
+#include <string>
+#include <cmath>
+#include <math.h>
+class Calculator
+{
+    public:
+        Calculator();
+        virtual ~Calculator();
+        int saskaitit(int a, int b);
+        int atnemshana(int a, int b);
+        int reizinashana(int a, int b);
+        int dalishana(int a, int b);
+        int kvadratsakne(int a);
+        int Kubiskaasakne(int a);
+        void operacija(const std::string& dati);
+
+    protected:
+
+    private:
+};
+
+#endif // CALCULATOR_H
+
+src/Calculator.cpp
+	
+#include "Calculator.h"
+#include <iostream>
+#include <cmath>
+#include <math.h>
+
+Calculator::Calculator()
+{
+    //ctor
+}
+
+Calculator::~Calculator()
+{
+    //dtor
+}
+
+int Calculator::saskaitit(int a, int b)
+{
+    return a + b;
+}
+int Calculator::atnemshana(int a, int b)
+{
+    return a - b;
+}
+int Calculator::reizinashana(int a, int b)
+{
+    return a * b;
+}
+int Calculator::dalishana(int a, int b)
+{
+    return a / b;
+}
+int Calculator::kvadratsakne(int a)
+{
+    return sqrt (a);
+}
+int Calculator::Kubiskaasakne(int a)
+{
+    return cbrt(a);
+}
+void Calculator::operacija(const std::string& dati)
+{
+    int a = 0, b = 0;
+    if(dati == "kvadratsakne")
+    {
+        std::cout << "Ievadi ciparu : ";
+        std::cin >> a;
+        std::cout << sqrt(a) << std::endl;
+    }
+    if(dati == "kubiskaasakne")
+    {
+        std::cout << "Ievadi ciparu : ";
+        std::cin >> a;
+        std::cout << cbrt(a) << std::endl;
+    }
+    else
+    {
+    std::cout << "Ievadiet pirmo ciparu : ";
+    std::cin >> a;
+    std::cout << "Ievadiet otro ciparu : ";
+    std::cin >> b;
+    if(dati == "+")
+    {
+        std::cout << "Summa : " << saskaitit(a, b) << std::endl;
+    }
+    if(dati == "-")
+    {
+        std::cout << "Starpiiba : " << atnemshana(a, b) << std::endl;
+    }
+    if(dati == "*")
+    {
+        std::cout << "Reizinaajums : " << reizinashana(a, b) << std::endl;
+    }
+    if(dati == "/")
+    {
+        std::cout << "Daliijums : " << dalishana(a, b) << std::endl;
+    }
+
+    }
+}
